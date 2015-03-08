@@ -33,29 +33,32 @@ WIDTH = canvas.width;
 HEIGHT = canvas.height;
 
 visualize = function() {
-  var bufferLength, dataArray, draw;
+  var bufferLength, dataArray, draw, s;
   WIDTH = canvas.width;
   HEIGHT = canvas.height;
+  s = 0.0;
   console.log("Visualizing");
-  analyser.fftSize = 512;
+  analyser.fftSize = 2048;
   bufferLength = analyser.frequencyBinCount;
   dataArray = new Uint8Array(bufferLength);
   graphics.clearRect(0, 0, WIDTH, HEIGHT);
   draw = function() {
-    var barHeight, barWidth, drawVisual, i, j, ref, results, x;
+    var barHeight, barWidth, drawVisual, i, j, ref, results, rx, x;
     drawVisual = requestAnimationFrame(draw);
     analyser.getByteFrequencyData(dataArray);
     graphics.fillStyle = 'rgba(10,10,10,64)';
     graphics.fillRect(0, 0, WIDTH, HEIGHT);
-    barWidth = (WIDTH / bufferLength) * 2.5;
+    barWidth = (WIDTH / bufferLength) * 15;
     x = 0;
-    logo.css("top", HEIGHT / 2.5 + dataArray[0] / 4);
+    s = 0.8 + dataArray[4] / 150;
+    rx = dataArray[8] / 5;
+    logo.css("transform", "scale(" + s + ") rotateX(" + rx + "deg)");
     results = [];
     for (i = j = 0, ref = bufferLength; j <= ref; i = j += 1) {
       barHeight = Math.pow(dataArray[i], 2) / 50;
       graphics.fillStyle = 'rgb(' + (dataArray[i] + 100 + ',50,50)');
       graphics.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-      results.push(x += barWidth + 1);
+      results.push(x += barWidth + 10);
     }
     return results;
   };

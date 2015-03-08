@@ -47,6 +47,12 @@
     padding:0;
       overflow:hidden;
   }
+
+  #logo {
+    /*-webkit-transform: rotateX(85deg);
+    transform:rotateX(85deg);*/
+  }
+
   canvas {
     position:fixed;
     top:0;
@@ -60,14 +66,14 @@
   <div id="background">
   </div>
 
+  <canvas class="visualizer" width="640" height="100"></canvas>
   <div class="wrapper">
-    <canvas class="visualizer" width="640" height="100"></canvas>
     <audio src="particles.mp3" autoplay loop>
   </div>
   <input type="text" id="octave-divisor" />
 
   <div id="logoContainer" class="container">
-    <img id="logo" class='img img-logo center' src="./images/logo-laser.png" />
+    <img id="logo" class='logo img img-logo center' src="./images/logo-laser.png" />
     <!-- <img id="star" class='img img-logo center' src="./images/shooting-star.png" /> -->
   </div>
   <script type="text/javascript">
